@@ -44,3 +44,16 @@ def get_all_data(endpoint):
             break
     
     return final_data
+
+def search_data(entity_type, items):
+    if not isinstance(items, dict):
+        raise ValueError("The 'items' parameter must be a dictonary.")
+
+    param_string = '&'.join(f'{key}={value}' for key, value in items)
+    url = f'{BASE_URL}/search?{entity_type}' + param_string
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        response.raise_for_status()

@@ -13,7 +13,9 @@ def main():
         }
         product_names.append(metadata)
     
-    print(json.dumps(product_names, indent=4))
+    file_name = "response.json"
+    with open(file_name, "w") as json_file:
+        json.dump(data, json_file, indent=4)
 
 main()
 
